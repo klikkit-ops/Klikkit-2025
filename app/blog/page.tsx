@@ -4,11 +4,18 @@ import { Calendar, ArrowRight } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 export default async function BlogPage() {
-  const { data: blogPosts } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('published', true)
-    .order('published_at', { ascending: false })
+  let blogPosts = []
+  try {
+    const { data } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('published', true)
+      .order('published_at', { ascending: false })
+    blogPosts = data || []
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    // Fallback to empty array if Supabase is not configured
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

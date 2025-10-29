@@ -16,6 +16,13 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Check if environment variables are configured
+    if (!process.env.SUPABASE_URL || !process.env.RESEND_API_KEY) {
+      return NextResponse.json({ 
+        error: 'Service not configured. Please check environment variables.' 
+      }, { status: 503 })
+    }
+
     // Insert into Supabase
     const { data: submission, error: dbError } = await supabase
       .from('contact_submissions')

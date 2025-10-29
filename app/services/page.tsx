@@ -3,11 +3,18 @@ import { CheckCircle, ArrowRight } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 export default async function ServicesPage() {
-  const { data: services } = await supabase
-    .from('services')
-    .select('*')
-    .eq('active', true)
-    .order('tier_order')
+  let services = []
+  try {
+    const { data } = await supabase
+      .from('services')
+      .select('*')
+      .eq('active', true)
+      .order('tier_order')
+    services = data || []
+  } catch (error) {
+    console.error('Error fetching services:', error)
+    // Fallback to empty array if Supabase is not configured
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

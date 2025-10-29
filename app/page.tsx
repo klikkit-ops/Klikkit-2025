@@ -5,12 +5,19 @@ import ChatWidget from '@/components/ChatWidget'
 
 export default async function HomePage() {
   // Fetch services for the homepage
-  const { data: services } = await supabase
-    .from('services')
-    .select('*')
-    .eq('active', true)
-    .order('tier_order')
-    .limit(3)
+  let services = []
+  try {
+    const { data } = await supabase
+      .from('services')
+      .select('*')
+      .eq('active', true)
+      .order('tier_order')
+      .limit(3)
+    services = data || []
+  } catch (error) {
+    console.error('Error fetching services:', error)
+    // Fallback to empty array if Supabase is not configured
+  }
 
   return (
     <div className="min-h-screen">

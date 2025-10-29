@@ -4,10 +4,17 @@ import { ExternalLink, Calendar } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 export default async function PortfolioPage() {
-  const { data: portfolioItems } = await supabase
-    .from('portfolio_items')
-    .select('*')
-    .order('created_at', { ascending: false })
+  let portfolioItems = []
+  try {
+    const { data } = await supabase
+      .from('portfolio_items')
+      .select('*')
+      .order('created_at', { ascending: false })
+    portfolioItems = data || []
+  } catch (error) {
+    console.error('Error fetching portfolio items:', error)
+    // Fallback to empty array if Supabase is not configured
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

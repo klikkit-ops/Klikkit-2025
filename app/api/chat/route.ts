@@ -14,6 +14,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Message is required' }, { status: 400 })
     }
 
+    // Check if environment variables are configured
+    if (!process.env.SUPABASE_URL || !process.env.OPENAI_API_KEY) {
+      return NextResponse.json({ 
+        error: 'Service not configured. Please check environment variables.' 
+      }, { status: 503 })
+    }
+
     // Get services data for context
     const { data: services } = await supabase
       .from('services')

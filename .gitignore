@@ -3,3 +3,4 @@
 /.next
 /supabase/.temp
 .DS_Store.env.local
+env.local

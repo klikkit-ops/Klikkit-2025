@@ -28,7 +28,9 @@ export interface PortfolioItem {
   image_url: string
   project_url?: string
   technologies: string[]
+  project_type?: 'web' | 'ios' | 'android' | 'cross-platform' | 'pwa'
   featured: boolean
+  metrics?: Record<string, string>
   created_at: string
   updated_at: string
 }

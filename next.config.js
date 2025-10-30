@@ -1,7 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['ywmxkvkocthifcztevge.supabase.co'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ywmxkvkocthifcztevge.supabase.co',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY,

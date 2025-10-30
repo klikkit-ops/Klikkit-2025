@@ -1,0 +1,33 @@
+{
+  "context": [
+    "content/website-copy.md"
+  ],
+  "commands": [
+    {
+      "name": "Generate Website Pages from Markdown",
+      "trigger": "onCommand",
+      "run": "npx cursor generate-pages content/website-copy.md --framework nextjs --output app/(marketing)"
+    },
+    {
+      "name": "Generate Components from Markdown Sections",
+      "trigger": "onCommand",
+      "run": "npx cursor split-md content/website-copy.md --output components/marketing --naming 'Section_${title}'"
+    },
+    {
+      "name": "Build Page Routes",
+      "trigger": "onCommand",
+      "run": "echo 'Creating page routes...' && mkdir -p app/(marketing) && echo 'export default function Page() { return <Home /> }' > app/(marketing)/page.tsx"
+    },
+    {
+      "name": "Deploy Website",
+      "trigger": "onCommand",
+      "run": "git add . && git commit -m 'Automated site update via Cursor' && git push origin main && vercel --prod --yes"
+    }
+  ],
+  "notes": [
+    "Each ## heading in website-copy.md becomes a marketing component.",
+    "Use 'Generate Website Pages from Markdown' to scaffold Next.js routes.",
+    "Use 'Generate Components from Markdown Sections' to create reusable components.",
+    "Run 'Deploy Website' to auto-commit changes and trigger a live Vercel deployment."
+  ]
+}

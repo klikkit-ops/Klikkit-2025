@@ -4,8 +4,8 @@ import { Calendar, ArrowLeft, Clock } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import { notFound } from 'next/navigation'
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
 
   let post = null
   try {

@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, TrendingUp } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
-export default async function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const { slug } = params
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
 
   // Fetch the specific service
   let service = null

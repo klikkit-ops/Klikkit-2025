@@ -1,0 +1,290 @@
+import Link from 'next/link'
+import Image from 'next/image'
+import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, TrendingUp } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
+
+export default async function ServiceDetailPage({ params }: { params: { slug: string } }) {
+  const { slug } = params
+
+  // Fetch the specific service
+  let service = null
+  try {
+    const { data } = await supabase
+      .from('services')
+      .select('*')
+      .eq('slug', slug)
+      .eq('active', true)
+      .single()
+    service = data
+  } catch (error) {
+    console.error('Error fetching service:', error)
+  }
+
+  if (!service) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Service not found</h1>
+          <Link href="/services" className="text-primary-600 hover:text-primary-700">
+            Back to all services
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  const isMobileAppService = slug === 'mobile-app-development'
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className={`relative overflow-hidden section-padding-lg ${
+        isMobileAppService ? 'bg-gradient-hero text-white' : 'bg-white'
+      }`}>
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <Image
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80"
+            alt="Digital services"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="container-max relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {isMobileAppService && (
+              <div className="inline-flex items-center gap-2 glass-morphism px-4 py-2 rounded-full mb-6">
+                <Sparkles className="text-primary-600" size={16} />
+                <span className="text-sm font-medium text-gray-900">Featured Service</span>
+              </div>
+            )}
+            <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isMobileAppService ? 'text-white' : 'text-gray-900'}`}>
+              {service.title}
+            </h1>
+            <p className={`text-xl mb-8 max-w-2xl mx-auto ${
+              isMobileAppService ? 'text-white/90' : 'text-gray-600'
+            }`}>
+              {service.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="btn-gradient text-lg px-8 py-4 inline-flex items-center justify-center">
+                Get Started
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+              <Link 
+                href="/contact" 
+                className={`text-lg px-8 py-4 rounded-lg font-medium transition-all duration-200 inline-flex items-center justify-center border-2 ${
+                  isMobileAppService 
+                    ? 'border-white text-white hover:bg-white hover:text-primary-600' 
+                    : 'border-primary-600 text-primary-600 hover:bg-primary-50'
+                }`}
+              >
+                Book a call
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="section-padding bg-white">
+        <div className="container-max">
+          <div className="max-w-4xl mx-auto">
+            <div className="glass-morphism rounded-2xl p-8 md:p-12 text-center">
+              <div className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+                £{service.price_setup}
+              </div>
+              {service.price_monthly > 0 ? (
+                <>
+                  <div className="text-xl text-gray-600 mb-2">
+                    + £{service.price_monthly}/month
+                  </div>
+                  <p className="text-gray-500 text-sm mb-8">
+                    One-time setup fee, then monthly support
+                  </p>
+                </>
+              ) : (
+                <p className="text-gray-500 text-sm mb-8">
+                  One-time setup, custom pricing
+                </p>
+              )}
+              <Link href="/contact" className="btn-gradient inline-flex items-center text-lg px-8 py-4">
+                Request a quote
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features */}
+      <section className="section-padding">
+        <div className="container-max">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                What's included
+              </h2>
+              <p className="text-xl text-gray-600">
+                Everything you need to get started and grow
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {service.features.map((feature: string, index: number) => (
+                <div key={index} className="flex items-start glass-morphism rounded-xl p-6">
+                  <CheckCircle className="text-primary-600 mr-4 mt-0.5 flex-shrink-0" size={24} />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">{feature}</h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose This Service */}
+      <section className="section-padding bg-white">
+        <div className="container-max">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Why {service.title}?
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center glass-morphism rounded-2xl p-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="text-white" size={32} />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Fast Setup</h3>
+                <p className="text-gray-600">
+                  Get up and running quickly with our streamlined process
+                </p>
+              </div>
+
+              <div className="text-center glass-morphism rounded-2xl p-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="text-white" size={32} />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Trusted Partner</h3>
+                <p className="text-gray-600">
+                  Ongoing support and maintenance included
+                </p>
+              </div>
+
+              <div className="text-center glass-morphism rounded-2xl p-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="text-white" size={32} />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Growth Focused</h3>
+                <p className="text-gray-600">
+                  Built to scale with your business
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="section-padding">
+        <div className="container-max">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                How it works
+              </h2>
+            </div>
+
+            <div className="space-y-8">
+              <div className="glass-morphism rounded-2xl p-8 flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Discovery & Planning</h3>
+                  <p className="text-gray-600">
+                    We'll discuss your goals, target audience, and requirements to create a tailored plan.
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-morphism rounded-2xl p-8 flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Design & Development</h3>
+                  <p className="text-gray-600">
+                    We build your solution using the latest technologies and best practices.
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-morphism rounded-2xl p-8 flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Testing & Launch</h3>
+                  <p className="text-gray-600">
+                    Thorough testing ensures everything works perfectly before going live.
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-morphism rounded-2xl p-8 flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                  4
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Ongoing Support</h3>
+                  <p className="text-gray-600">
+                    Continuous improvements and updates to keep you ahead of the competition.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding bg-gradient-hero text-white relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <Image
+            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80"
+            alt="Call to action"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="container-max relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to get started?
+            </h2>
+            <p className="text-xl text-white/90 mb-8">
+              Book a free consultation to discuss how {service.title} can help your business grow.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="bg-white text-primary-600 hover:bg-gray-100 font-medium py-4 px-8 rounded-lg transition-colors text-lg inline-flex items-center justify-center">
+                Get started today
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+              <Link 
+                href="/portfolio" 
+                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-medium py-4 px-8 rounded-lg transition-colors text-lg inline-flex items-center justify-center"
+              >
+                View our work
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+

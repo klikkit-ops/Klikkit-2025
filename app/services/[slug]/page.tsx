@@ -3,6 +3,76 @@ import Image from 'next/image'
 import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, TrendingUp } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
+// Fallback service data for when Supabase is not configured
+const fallbackServices: Record<string, any> = {
+  'digital-launchpad': {
+    title: 'Digital Launchpad',
+    subtitle: 'Perfect for startups and solo traders',
+    price_setup: 750,
+    price_monthly: 150,
+    features: [
+      '5-page PWA website',
+      'AI-assisted content & imagery',
+      'Basic AI chatbot',
+      'SEO setup + Google Business integration',
+      'Hosting & security',
+      'Progressive Web App (PWA) features'
+    ]
+  },
+  'business-growth-engine': {
+    title: 'Business Growth Engine',
+    subtitle: 'Ideal for established small businesses',
+    price_setup: 1250,
+    price_monthly: 250,
+    features: [
+      'Up to 10 pages + e-commerce',
+      'Advanced AI personalization',
+      'Booking systems / advanced forms',
+      'Priority support',
+      'Everything in Digital Launchpad',
+      'Advanced PWA with offline capabilities',
+      'Voice interface integration'
+    ]
+  },
+  'mobile-app-development': {
+    title: 'Mobile App Development',
+    subtitle: 'Native iOS & Android apps for your business',
+    price_setup: 3500,
+    price_monthly: 300,
+    features: [
+      'Native iOS app (SwiftUI)',
+      'Native Android app (Kotlin)',
+      'Cross-platform option (React Native/Flutter)',
+      'App Store & Play Store submission',
+      'Push notifications setup',
+      'Analytics integration',
+      'Beta testing program',
+      '3 months post-launch support'
+    ]
+  },
+  'custom-pro-solution': {
+    title: 'Custom Pro Solution',
+    subtitle: 'Fully bespoke architecture for complex needs',
+    price_setup: 8000,
+    price_monthly: 0,
+    features: [
+      'Fully bespoke architecture',
+      'Custom logic, dashboards, integrations',
+      'Dedicated support + maintenance',
+      'React, Node, React-Native/Flutter',
+      'Value-based pricing',
+      'Native iOS app development',
+      'Native Android app development',
+      'Cross-platform mobile apps',
+      'App Store optimization',
+      'Push notifications',
+      'Apple Pay & Google Pay integration',
+      'AR/VR capabilities',
+      'Real-time analytics dashboards'
+    ]
+  }
+}
+
 export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
 
@@ -20,6 +90,12 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     console.error('Error fetching service:', error)
   }
 
+  // Use fallback data if Supabase is not configured
+  if (!service && fallbackServices[slug]) {
+    service = fallbackServices[slug]
+  }
+
+  // If still no service found, show error
   if (!service) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">

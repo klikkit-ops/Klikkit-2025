@@ -53,7 +53,11 @@ export default function Header() {
 
               {/* Mega Menu */}
               {servicesMenuOpen && (
-                <div className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 p-6 animate-fade-in">
+                <div 
+                  className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 p-6 animate-fade-in"
+                  onMouseEnter={() => setServicesMenuOpen(true)}
+                  onMouseLeave={() => setServicesMenuOpen(false)}
+                >
                   <div className="grid grid-cols-1 gap-4">
                     <Link
                       href="/services"

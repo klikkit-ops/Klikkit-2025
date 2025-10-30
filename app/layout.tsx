@@ -7,25 +7,29 @@ import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Klikkit - Smarter Websites That Grow With Your Business',
-  description: 'Tech-forward digital consultancy for South-East London businesses. AI-enhanced websites, SEO, and growth strategies.',
-  keywords: 'web design, digital marketing, SEO, AI, South London, business growth',
+  title: 'Klikkit - Website Design & iOS App Development | South-East London',
+  description: 'Tech-forward digital consultancy for South-East London businesses. AI-enhanced websites, native iOS apps, PWAs, and growth strategies. Serving Croydon, Bromley, and surrounding areas.',
+  keywords: 'web design, iOS app development, mobile app development, website design London, South London web design, Progressive Web Apps, React Native, SwiftUI, AI websites, digital marketing, SEO, Croydon web design',
   authors: [{ name: 'Jake @ Klikkit' }],
   openGraph: {
-    title: 'Klikkit - Smarter Websites That Grow With Your Business',
-    description: 'Tech-forward digital consultancy for South-East London businesses.',
+    title: 'Klikkit - Website Design & iOS App Development | South-East London',
+    description: 'Tech-forward digital consultancy for South-East London businesses. AI-enhanced websites, native iOS apps, and growth strategies.',
     url: 'https://klikkit.co.uk',
     siteName: 'Klikkit',
     type: 'website',
+    locale: 'en_GB',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Klikkit - Smarter Websites That Grow With Your Business',
+    title: 'Klikkit - Website Design & iOS App Development',
     description: 'Tech-forward digital consultancy for South-East London businesses.',
   },
   robots: {
     index: true,
     follow: true,
+  },
+  alternates: {
+    canonical: 'https://klikkit.co.uk',
   },
 }
 

@@ -36,7 +36,9 @@ CREATE TABLE IF NOT EXISTS portfolio_items (
   image_url TEXT NOT NULL,
   project_url TEXT,
   technologies TEXT[] DEFAULT '{}',
+  project_type TEXT DEFAULT 'web', -- 'web', 'ios', 'android', 'cross-platform', 'pwa'
   featured BOOLEAN DEFAULT false,
+  metrics JSONB DEFAULT '{}', -- Store results like {"revenue_increase": "300%", "users": "5000"}
   created_at TIMESTAMPTZ DEFAULT NOW(),
   updated_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -89,24 +91,32 @@ CREATE INDEX IF NOT EXISTS idx_chat_logs_created_at ON chat_logs(created_at);
 INSERT INTO services (slug, title, subtitle, price_setup, price_monthly, features, tier_order, active) 
 SELECT * FROM (VALUES
   ('digital-launchpad', 'Digital Launchpad', 'Perfect for startups and solo traders', 750, 150, 
-   '["5-page PWA website","AI-assisted content & imagery","Basic AI chatbot","SEO setup + Google Business integration","Hosting & security"]'::jsonb, 1, true),
+   '["5-page PWA website","AI-assisted content & imagery","Basic AI chatbot","SEO setup + Google Business integration","Hosting & security","Progressive Web App (PWA) features"]'::jsonb, 1, true),
   ('business-growth-engine', 'Business Growth Engine', 'Ideal for established small businesses', 1250, 250,
-   '["Up to 10 pages + e-commerce","Advanced AI personalization","Booking systems / advanced forms","Priority support","Everything in Digital Launchpad"]'::jsonb, 2, true),
+   '["Up to 10 pages + e-commerce","Advanced AI personalization","Booking systems / advanced forms","Priority support","Everything in Digital Launchpad","Advanced PWA with offline capabilities","Voice interface integration"]'::jsonb, 2, true),
   ('custom-pro-solution', 'Custom Pro Solution', 'Fully bespoke architecture for complex needs', 8000, 0,
-   '["Fully bespoke architecture","Custom logic, dashboards, integrations","Dedicated support + maintenance","React, Node, React-Native/Flutter","Value-based pricing"]'::jsonb, 3, true)
+   '["Fully bespoke architecture","Custom logic, dashboards, integrations","Dedicated support + maintenance","React, Node, React-Native/Flutter","Value-based pricing","Native iOS app development","Native Android app development","Cross-platform mobile apps (React Native/Flutter)","App Store optimization","Push notifications","Apple Pay & Google Pay integration","AR/VR capabilities","Real-time analytics dashboards"]'::jsonb, 3, true),
+  ('mobile-app-development', 'Mobile App Development', 'Native iOS & Android apps for your business', 3500, 300,
+   '["Native iOS app (SwiftUI)","Native Android app (Kotlin)","Cross-platform option (React Native/Flutter)","App Store & Play Store submission","Push notifications setup","Analytics integration","Beta testing program","3 months post-launch support"]'::jsonb, 4, true)
 ) AS v(slug, title, subtitle, price_setup, price_monthly, features, tier_order, active)
 WHERE NOT EXISTS (SELECT 1 FROM services LIMIT 1);
 
 -- Insert sample portfolio data (only if table is empty)
-INSERT INTO portfolio_items (title, description, image_url, project_url, technologies, featured) 
+INSERT INTO portfolio_items (title, description, image_url, project_url, technologies, project_type, featured, metrics) 
 SELECT * FROM (VALUES
   ('Local Restaurant Website', 'Complete digital transformation for a family restaurant with online ordering and table booking', 
    'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800', 'https://example.com', 
-   ARRAY['Next.js', 'TailwindCSS', 'Supabase', 'Stripe'], true),
+   ARRAY['Next.js', 'TailwindCSS', 'Supabase', 'Stripe'], 'web', true, '{"revenue_increase": "300%", "booking_increase": "250%"}'::jsonb),
   ('E-commerce Platform', 'Custom e-commerce solution with advanced inventory management and analytics', 
    'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800', 'https://example.com', 
-   ARRAY['React', 'Node.js', 'PostgreSQL', 'Redis'], true)
-) AS v(title, description, image_url, project_url, technologies, featured)
+   ARRAY['React', 'Node.js', 'PostgreSQL', 'Redis'], 'web', true, '{"conversion_rate": "15%", "revenue_growth": "200%"}'::jsonb),
+  ('Fitness App - iOS', 'Native iOS fitness tracking app with workout plans and progress analytics', 
+   'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800', 'https://example.com', 
+   ARRAY['SwiftUI', 'HealthKit', 'Core Data', 'CloudKit'], 'ios', true, '{"downloads": "5000+", "rating": "4.8", "active_users": "3000+"}'::jsonb),
+  ('Business Management App', 'Cross-platform mobile app for small business management', 
+   'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800', 'https://example.com', 
+   ARRAY['React Native', 'Firebase', 'Stripe'], 'cross-platform', true, '{"users": "2000+", "rating": "4.7"}'::jsonb)
+) AS v(title, description, image_url, project_url, technologies, project_type, featured, metrics)
 WHERE NOT EXISTS (SELECT 1 FROM portfolio_items LIMIT 1);
 
 -- Insert sample blog posts (only if table is empty)

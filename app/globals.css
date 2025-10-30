@@ -3,69 +3,195 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-primary: 13 148 136;
+    --color-accent: 14 165 233;
+    --gradient-primary: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    --gradient-accent: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+    --gradient-hero: linear-gradient(135deg, #0d9488 0%, #0ea5e9 50%, #14b8a6 100%);
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
   html {
     scroll-behavior: smooth;
   }
   
   body {
     @apply text-gray-900 bg-white;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-primary: 20 184 166;
+      --color-accent: 56 189 248;
+    }
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-200;
+    @apply shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
   }
   
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-primary-600 font-semibold py-4 px-8 rounded-xl border-2 border-primary-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5;
+    @apply bg-white hover:bg-gray-50 text-primary-600 font-medium py-3 px-6 rounded-lg border border-primary-600 transition-all duration-200;
+    @apply shadow-sm hover:shadow-md transform hover:-translate-y-0.5;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+  }
+
+  .btn-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-accent-600 text-white font-medium py-3 px-6 rounded-lg;
+    @apply transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
   }
   
   .section-padding {
-    @apply py-20 px-4 sm:px-6 lg:px-8;
+    @apply py-16 px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding-lg {
+    @apply py-24 px-4 sm:px-6 lg:px-8;
   }
   
   .container-max {
     @apply max-w-7xl mx-auto;
   }
 
-  .gradient-bg {
-    @apply bg-gradient-to-br from-primary-50 via-white to-primary-100;
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-600;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-105;
+    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
   }
 
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary-500 to-primary-700 bg-clip-text text-transparent;
+  .micro-interaction {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .gradient-overlay {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(14, 165, 233, 0.1) 100%);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, #0d9488 0%, #0ea5e9 50%, #14b8a6 100%);
   }
 
   .glass-effect {
-    @apply bg-white/80 backdrop-blur-sm border border-white/20;
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-lg;
   }
 
-  .floating-animation {
-    animation: float 6s ease-in-out infinite;
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   }
 
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+  .glass-dark {
+    background: rgba(17, 25, 40, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   }
 
-  .fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
+  .glass-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
   }
 
-  @keyframes fadeInUp {
+  .liquid-effect {
+    background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(14, 165, 233, 0.1));
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      0 8px 32px 0 rgba(31, 38, 135, 0.2),
+      inset 0 0 60px rgba(255, 255, 255, 0.1);
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(13, 148, 136, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 30px rgba(13, 148, 136, 0.5);
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
   }
 }

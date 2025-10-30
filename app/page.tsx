@@ -1,7 +1,13 @@
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, Star, Zap, Shield, Users } from 'lucide-react'
+import Image from 'next/image'
+import { ArrowRight, Zap, Shield, Users, Sparkles, Clock, CheckCircle2, TrendingUp } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 import ChatWidget from '@/components/ChatWidget'
+import ServiceCard from '@/components/ServiceCard'
+import StatsSection from '@/components/StatsSection'
+import TestimonialCarousel from '@/components/TestimonialCarousel'
+import ProcessSection from '@/components/ProcessSection'
+import FAQSection from '@/components/FAQSection'
 
 export default async function HomePage() {
   // Fetch services for the homepage
@@ -21,111 +27,168 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative gradient-bg section-padding overflow-hidden">
-        {/* Background Elements */}
+      {/* Hero Section - Conversion Focused */}
+      <section className="relative overflow-hidden section-padding-lg">
+        {/* Background Image with Glass Overlay */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 floating-animation"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 floating-animation" style={{animationDelay: '2s'}}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary-100 rounded-full mix-blend-multiply filter blur-xl opacity-50 floating-animation" style={{animationDelay: '4s'}}></div>
+          <Image
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80"
+            alt="Modern office workspace"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-900/90 via-primary-800/80 to-accent-900/90"></div>
         </div>
-        
+
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        </div>
+
         <div className="container-max relative z-10">
-          <div className="max-w-5xl mx-auto text-center">
-            <div className="fade-in-up">
-              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
-                Smarter websites,{' '}
-                <span className="text-gradient">not just prettier ones</span>
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
-                Tech-forward digital consultancy for South-East London businesses. 
-                AI-enhanced websites that grow with your business.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <Link href="/contact" className="btn-primary text-lg group">
-                  Book your free strategy call
-                  <ArrowRight className="ml-2 inline-block group-hover:translate-x-1 transition-transform" size={20} />
-                </Link>
-                <Link href="/services" className="btn-secondary text-lg">
-                  See our services
-                </Link>
+          <div className="max-w-5xl mx-auto text-center text-white">
+            {/* Trust Badge with Glass Effect */}
+            <div className="inline-flex items-center gap-2 glass-morphism px-4 py-2 rounded-full mb-6 animate-fade-in">
+              <Sparkles className="text-yellow-300" size={16} />
+              <span className="text-sm font-medium text-gray-900">Trusted by 50+ businesses across South-East London</span>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance animate-slide-up">
+              Websites, iOS Apps & Digital Solutions That{' '}
+              <span className="text-yellow-300">Convert</span>
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-3xl mx-auto text-balance animate-slide-up" style={{ animationDelay: '100ms' }}>
+              Tech-forward digital consultancy for South-East London businesses. 
+              AI-enhanced websites, native iOS apps, and growth strategies that drive real results.
+            </p>
+
+            {/* Social Proof Numbers */}
+            <div className="flex flex-wrap justify-center gap-6 mb-10 animate-fade-in" style={{ animationDelay: '200ms' }}>
+              <div className="text-center">
+                <div className="text-3xl font-bold">300+</div>
+                <div className="text-sm text-white/80">Websites Launched</div>
               </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold">£2M+</div>
+                <div className="text-sm text-white/80">Revenue Generated</div>
+              </div>
+              <div className="text-center">
+                <div className="text-3xl font-bold">4.9/5</div>
+                <div className="text-sm text-white/80">Average Rating</div>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6 animate-scale-in" style={{ animationDelay: '300ms' }}>
+              <Link href="/contact" className="btn-gradient text-lg px-8 py-4 inline-flex items-center justify-center">
+                Book your free strategy call
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+              <Link href="/services" className="bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 border-2 border-white/30 text-lg px-8 py-4 rounded-lg font-medium transition-all duration-200 inline-flex items-center justify-center">
+                See our services
+              </Link>
+            </div>
+
+            {/* Urgency/Scarcity Element */}
+            <div className="inline-flex items-center gap-2 text-sm text-white/90 animate-fade-in" style={{ animationDelay: '400ms' }}>
+              <Clock className="text-yellow-300" size={16} />
+              <span>Limited spots available for Q1 2026 projects</span>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Stats Section with Images */}
+      <section className="section-padding bg-white relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <Image
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80"
+            alt="Team collaboration"
+            fill
+            className="object-cover"
+          />
+        </div>
+        
+        <StatsSection />
+      </section>
+
       {/* Services Overview */}
-      <section className="section-padding bg-gradient-to-b from-white to-gray-50">
+      <section className="section-padding bg-white">
         <div className="container-max">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Three service tiers,{' '}
-              <span className="text-gradient">one goal: your growth</span>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Service tiers designed for your growth
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              From startup launchpads to enterprise solutions, we've got the perfect fit for your business.
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              From startup launchpads to enterprise solutions, including native iOS app development—we've got the perfect fit for your business.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {services?.map((service, index) => (
-              <div
+              <ServiceCard
                 key={service.id}
-                className={`relative glass-effect rounded-3xl p-8 card-hover ${
-                  index === 1 ? 'ring-2 ring-primary-500 scale-105 shadow-2xl' : 'shadow-xl'
-                }`}
-              >
-                {index === 1 && (
-                  <div className="absolute -top-6 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                
-                <div className="text-center mb-8">
-                  <div className={`w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center ${
-                    index === 0 ? 'bg-gradient-to-br from-primary-100 to-primary-200' :
-                    index === 1 ? 'bg-gradient-to-br from-primary-200 to-primary-300' :
-                    'bg-gradient-to-br from-primary-300 to-primary-400'
-                  }`}>
-                    {index === 0 && <Zap className="text-primary-600" size={32} />}
-                    {index === 1 && <Shield className="text-primary-700" size={32} />}
-                    {index === 2 && <Users className="text-primary-800" size={32} />}
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                  <p className="text-gray-600 text-lg">{service.subtitle}</p>
-                </div>
+                service={service}
+                index={index}
+                isPopular={index === 1}
+              />
+            ))}
+          </div>
 
-                <div className="text-center mb-8">
-                  <div className="text-5xl font-bold text-gray-900 mb-2">
-                    £{service.price_setup}
-                  </div>
-                  <div className="text-gray-600 text-lg">
-                    setup + £{service.price_monthly}/month
-                  </div>
-                </div>
-
-                <ul className="space-y-4 mb-10">
-                  {service.features.map((feature: string, featureIndex: number) => (
-                    <li key={featureIndex} className="flex items-start">
-                      <CheckCircle className="text-primary-500 mr-4 mt-1 flex-shrink-0" size={20} />
-                      <span className="text-gray-700 text-lg">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href={`/services/${service.slug}`}
-                  className={`w-full text-center py-4 px-6 rounded-xl font-semibold text-lg transition-all duration-300 ${
-                    index === 1
-                      ? 'bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white shadow-lg hover:shadow-xl'
-                      : 'bg-gray-100 hover:bg-gray-200 text-gray-900 shadow-md hover:shadow-lg'
-                  }`}
-                >
-                  Learn More
+          {/* Mobile App Development Highlight */}
+          <div className="mt-12 text-center">
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary-50 to-accent-50 px-6 py-4 rounded-lg border border-primary-200">
+              <Sparkles className="text-primary-600" size={20} />
+              <span className="text-gray-900 font-medium">
+                Need an iOS or Android app?{' '}
+                <Link href="/services/mobile-app-development" className="text-primary-600 hover:text-primary-700 font-semibold">
+                  Check out our Mobile App Development service →
                 </Link>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technology Stack Showcase */}
+      <section className="section-padding bg-gray-50 relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 overflow-hidden opacity-5">
+          <Image
+            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1920&q=80"
+            alt="Code and technology"
+            fill
+            className="object-cover"
+          />
+        </div>
+        
+        <div className="container-max relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Built with modern technology
+            </h2>
+            <p className="text-xl text-gray-600">
+              We use cutting-edge tools and frameworks to deliver exceptional results
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+            {[
+              'Next.js', 'React', 'SwiftUI', 'React Native', 'TypeScript', 'Supabase',
+              'TailwindCSS', 'Node.js', 'Firebase', 'AI/ML', 'PostgreSQL', 'AWS'
+            ].map((tech, index) => (
+              <div
+                key={tech}
+                className="glass-morphism rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-1 animate-fade-in"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <div className="text-2xl font-bold text-gray-900">{tech}</div>
               </div>
             ))}
           </div>
@@ -133,139 +196,157 @@ export default async function HomePage() {
       </section>
 
       {/* Value Proposition */}
-      <section className="section-padding bg-gradient-to-br from-gray-50 via-white to-primary-50">
+      <section className="section-padding bg-white">
         <div className="container-max">
-          <div className="max-w-6xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-              Why choose <span className="text-gradient">Klikkit</span>?
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">
+              Why choose Klikkit?
             </h2>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary-100 to-primary-200 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Zap className="text-primary-600" size={36} />
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Zap className="text-white" size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">AI-Powered</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">AI-Powered</h3>
+                <p className="text-gray-600">
                   Smart automation and personalization that adapts to your customers' needs.
                 </p>
               </div>
               
-              <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary-200 to-primary-300 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Shield className="text-primary-700" size={36} />
+              <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Shield className="text-white" size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Local Partner</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Local Partner</h3>
+                <p className="text-gray-600">
                   South-East London based with global-grade technology and support.
                 </p>
               </div>
               
-              <div className="text-center group">
-                <div className="w-20 h-20 bg-gradient-to-br from-primary-300 to-primary-400 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Users className="text-primary-800" size={36} />
+              <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                  <Users className="text-white" size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Growth Focused</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Growth Focused</h3>
+                <p className="text-gray-600">
                   Ongoing optimization through SEO, analytics, and conversion tracking.
                 </p>
               </div>
             </div>
 
-            <div className="glass-effect rounded-3xl p-10 shadow-2xl">
-              <h3 className="text-3xl font-bold text-gray-900 mb-6">
-                Ready to see how AI can power your next site?
+            {/* Risk Reversal CTA */}
+            <div className="liquid-effect rounded-2xl p-8">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                <CheckCircle2 className="text-green-500" size={24} />
+                <span className="font-semibold text-gray-900">Free 30-minute strategy call</span>
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                Ready to see how we can power your next project?
               </h3>
-              <p className="text-gray-600 mb-8 text-xl leading-relaxed">
-                Book a free 30-minute strategy call and discover what's possible for your business.
+              <p className="text-gray-600 mb-6">
+                Book a free consultation and discover what's possible for your business. No obligation, just insights.
               </p>
-              <Link href="/contact" className="btn-primary text-xl group">
-                Start your Digital Launchpad today
-                <ArrowRight className="ml-3 inline-block group-hover:translate-x-1 transition-transform" size={24} />
+              <Link href="/contact" className="btn-gradient text-lg px-8 py-4 inline-flex items-center">
+                Book your free strategy call
+                <ArrowRight className="ml-2" size={20} />
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className="section-padding bg-gradient-to-b from-white to-gray-50">
-        <div className="container-max">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Trusted by <span className="text-gradient">local businesses</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Real results from real businesses in South-East London
-            </p>
-          </div>
+      {/* Process Section */}
+      <ProcessSection />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass-effect rounded-2xl p-8 card-hover">
-              <div className="flex items-center mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="text-yellow-400 fill-current" size={24} />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                "Jake transformed our online presence. Our bookings increased by 300% in just 3 months."
-              </p>
-              <div className="font-bold text-gray-900 text-lg">Sarah M.</div>
-              <div className="text-gray-600">Local Restaurant Owner</div>
-            </div>
+      {/* Testimonials Carousel */}
+      <TestimonialCarousel />
 
-            <div className="glass-effect rounded-2xl p-8 card-hover">
-              <div className="flex items-center mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="text-yellow-400 fill-current" size={24} />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                "The AI chatbot handles 80% of our customer inquiries automatically. Game changer!"
-              </p>
-              <div className="font-bold text-gray-900 text-lg">Mike R.</div>
-              <div className="text-gray-600">E-commerce Store</div>
-            </div>
-
-            <div className="glass-effect rounded-2xl p-8 card-hover">
-              <div className="flex items-center mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="text-yellow-400 fill-current" size={24} />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-6 text-lg leading-relaxed">
-                "Professional, reliable, and always ahead of the curve. Highly recommend Klikkit."
-              </p>
-              <div className="font-bold text-gray-900 text-lg">Emma L.</div>
-              <div className="text-gray-600">Consulting Firm</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="relative section-padding bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-white/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 floating-animation"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-white/10 rounded-full mix-blend-multiply filter blur-xl opacity-70 floating-animation" style={{animationDelay: '2s'}}></div>
+      {/* Comparison Table */}
+      <section className="section-padding bg-gray-50 relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0 overflow-hidden opacity-5">
+          <Image
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80"
+            alt="Business comparison"
+            fill
+            className="object-cover"
+          />
         </div>
         
         <div className="container-max relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-              Ready to grow your business{' '}
-              <span className="text-white/90">online?</span>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              How we compare
             </h2>
-            <p className="text-xl md:text-2xl text-primary-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Join the South-East London businesses already growing with Klikkit.
+            <p className="text-xl text-gray-600">
+              See what sets us apart from other agencies
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link href="/contact" className="bg-white text-primary-600 hover:bg-gray-100 font-semibold py-5 px-10 rounded-xl transition-all duration-300 text-xl shadow-xl hover:shadow-2xl transform hover:-translate-y-1 group">
+          </div>
+
+          <div className="max-w-4xl mx-auto glass-morphism rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="bg-gradient-primary text-white">
+                  <tr>
+                    <th className="px-6 py-4 text-left font-semibold">Feature</th>
+                    <th className="px-6 py-4 text-center font-semibold">Other Agencies</th>
+                    <th className="px-6 py-4 text-center font-semibold bg-primary-700">Klikkit</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {[
+                    { feature: 'AI Integration', other: 'Limited', klikkit: '✓ Built-in' },
+                    { feature: 'iOS App Development', other: 'Separate Quote', klikkit: '✓ Available' },
+                    { feature: 'Monthly Support', other: 'Extra Cost', klikkit: '✓ Included' },
+                    { feature: 'SEO Optimization', other: 'Basic', klikkit: '✓ Advanced' },
+                    { feature: 'Local Support', other: 'Remote Only', klikkit: '✓ South-East London' },
+                    { feature: 'Transparent Pricing', other: 'Hidden Fees', klikkit: '✓ All Clear' },
+                  ].map((row, index) => (
+                    <tr key={index} className="hover:bg-gray-50 transition-colors">
+                      <td className="px-6 py-4 font-medium text-gray-900">{row.feature}</td>
+                      <td className="px-6 py-4 text-center text-gray-600">{row.other}</td>
+                      <td className="px-6 py-4 text-center text-primary-600 font-semibold bg-primary-50">{row.klikkit}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <FAQSection />
+
+      {/* Final CTA Section */}
+      <section className="relative overflow-hidden section-padding bg-gradient-hero text-white">
+        {/* Background Image */}
+        <div className="absolute inset-0 overflow-hidden">
+          <Image
+            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80"
+            alt="Business growth"
+            fill
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-900/95 via-primary-800/90 to-accent-900/95"></div>
+        </div>
+        
+        <div className="container-max relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to grow your business online?
+            </h2>
+            <p className="text-xl text-white/90 mb-8">
+              Join the South-East London businesses already growing with Klikkit. 
+              Book your free strategy call today.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="bg-white text-primary-600 hover:bg-gray-100 font-medium py-4 px-8 rounded-lg transition-all duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-flex items-center justify-center">
                 Book your free strategy call
-                <ArrowRight className="ml-3 inline-block group-hover:translate-x-1 transition-transform" size={24} />
+                <ArrowRight className="ml-2" size={20} />
               </Link>
-              <Link href="/portfolio" className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-semibold py-5 px-10 rounded-xl transition-all duration-300 text-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              <Link href="/portfolio" className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-medium py-4 px-8 rounded-lg transition-all duration-200 text-lg inline-flex items-center justify-center">
                 View our work
               </Link>
             </div>

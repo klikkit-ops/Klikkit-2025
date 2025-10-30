@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { supabase } from '@/lib/supabase'
 
-const resend = new Resend(process.env.RESEND_API_KEY || 'dummy-key-for-build')
+// Lazy initialize Resend client to avoid build-time errors
+function getResendClient() {
+  if (!process.env.RESEND_API_KEY) {
+    throw new Error('RESEND_API_KEY is not configured')
+  }
+  return new Resend(process.env.RESEND_API_KEY)
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -47,6 +53,7 @@ export async function POST(request: NextRequest) {
 
     // Send confirmation email to client
     try {
+      const resend = getResendClient()
       await resend.emails.send({
         from: 'Klikkit <hello@klikkit.co.uk>',
         to: [email],
@@ -73,6 +80,7 @@ export async function POST(request: NextRequest) {
 
     // Send notification to Klikkit
     try {
+      const resend = getResendClient()
       await resend.emails.send({
         from: 'Klikkit Contact Form <hello@klikkit.co.uk>',
         to: [process.env.CONTACT_EMAIL || 'jake@klikkit.co.uk'],

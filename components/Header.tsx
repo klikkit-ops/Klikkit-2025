@@ -45,7 +45,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
-              src="https://klikkit.co.uk/wp-content/uploads/2018/09/logo-white-pressed-370x118.png"
+              src="/logo.png"
               alt="Klikkit Logo"
               width={150}
               height={48}

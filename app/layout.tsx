@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   keywords: 'web design, iOS app development, mobile app development, website design London, South London web design, Progressive Web Apps, React Native, SwiftUI, AI websites, digital marketing, SEO, Croydon web design',
   authors: [{ name: 'Jake @ Klikkit' }],
   icons: {
-    icon: 'https://klikkit.co.uk/wp-content/uploads/2021/05/cropped-favicon-192x192.png',
-    apple: 'https://klikkit.co.uk/wp-content/uploads/2021/05/cropped-favicon-192x192.png',
+    icon: '/favicon.png',
+    apple: '/favicon.png',
   },
   openGraph: {
     title: 'Klikkit - Website Design & iOS App Development | South-East London',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     images: [
       {
-        url: 'https://klikkit.co.uk/wp-content/uploads/2018/09/logo-white-pressed-370x118.png',
+        url: '/logo.png',
         width: 370,
         height: 118,
         alt: 'Klikkit',

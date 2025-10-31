@@ -35,12 +35,12 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 transition-all duration-300">
-      <nav className="container-max pt-4 px-4">
+    <header className="sticky top-0 z-50 transition-all duration-300 px-4">
+      <nav className="container-max">
         <div 
           className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center max-w-6xl mx-auto"
           style={{
-            background: 'linear-gradient(to right, rgba(240, 185, 21, 0.25), rgba(255, 255, 255, 0.6))',
+            background: 'linear-gradient(to right, rgba(240, 185, 21, 0.3), rgba(240, 185, 21, 0.25))',
             backdropFilter: 'blur(20px) saturate(180%)',
             WebkitBackdropFilter: 'blur(20px) saturate(180%)',
           }}

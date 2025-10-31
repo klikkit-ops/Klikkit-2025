@@ -37,7 +37,14 @@ export default function Header() {
   return (
     <header className="sticky top-4 z-50 transition-all duration-300">
       <nav className="container-max">
-        <div className="glass-morphism backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center max-w-6xl mx-auto">
+        <div 
+          className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center max-w-6xl mx-auto"
+          style={{
+            background: 'linear-gradient(to right, rgba(240, 185, 21, 0.15), rgba(255, 255, 255, 0.7))',
+            backdropFilter: 'blur(20px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          }}
+        >
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image

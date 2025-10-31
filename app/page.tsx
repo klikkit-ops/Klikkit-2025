@@ -38,13 +38,13 @@ export default async function HomePage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-900/90 via-primary-800/80 to-accent-900/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#F0B915]/90 via-[#F0B915]/80 to-[#FFD452]/90"></div>
         </div>
 
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-400/20 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#F0B915]/20 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FFD452]/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
         </div>
 
         <div className="container-max relative z-10">
@@ -205,7 +205,7 @@ export default async function HomePage() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-[#F0B915] to-[#FFD452] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <Zap className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">AI-Powered</h3>
@@ -215,7 +215,7 @@ export default async function HomePage() {
               </div>
               
               <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-[#F0B915] to-[#FFD452] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <Shield className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Local Partner</h3>
@@ -225,7 +225,7 @@ export default async function HomePage() {
               </div>
               
               <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-[#F0B915] to-[#FFD452] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <Users className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Growth Focused</h3>
@@ -287,11 +287,11 @@ export default async function HomePage() {
           <div className="max-w-4xl mx-auto glass-morphism rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead>
+                <thead className="bg-gradient-primary text-white">
                   <tr>
-                    <th className="px-6 py-4 text-left font-semibold bg-gray-200 text-gray-900">Feature</th>
-                    <th className="px-6 py-4 text-center font-semibold bg-gray-400 text-white">Other Agencies</th>
-                    <th className="px-6 py-4 text-center font-semibold bg-gradient-primary text-white">Klikkit</th>
+                    <th className="px-6 py-4 text-left font-semibold">Feature</th>
+                    <th className="px-6 py-4 text-center font-semibold">Other Agencies</th>
+                    <th className="px-6 py-4 text-center font-semibold bg-primary-700">Klikkit</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">
@@ -329,7 +329,7 @@ export default async function HomePage() {
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-primary-900/95 via-primary-800/90 to-accent-900/95"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-[#F0B915]/95 via-[#F0B915]/90 to-[#FFD452]/95"></div>
         </div>
         
         <div className="container-max relative z-10">

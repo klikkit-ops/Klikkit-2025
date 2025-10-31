@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { Menu, X, ChevronDown, Sparkles } from 'lucide-react'
 
@@ -42,11 +43,14 @@ export default function Header() {
       <nav className="container-max">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary-600 to-primary-500 rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
-              <span className="text-white font-bold text-lg">K</span>
-            </div>
-            <span className="text-xl font-bold text-gray-900">Klikkit</span>
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="https://klikkit.co.uk/wp-content/uploads/2018/09/logo-white-pressed-370x118.png"
+              alt="Klikkit Logo"
+              width={150}
+              height={48}
+              className="transition-all duration-200 group-hover:opacity-80"
+            />
           </Link>
 
           {/* Desktop Navigation */}

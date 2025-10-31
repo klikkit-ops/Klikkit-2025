@@ -22,7 +22,7 @@ export default function ServiceCard({ service, index, isPopular = false }: Servi
     >
       {isPopular && (
         <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-          <span className="bg-gradient-to-r from-primary-500 to-accent-500 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
+          <span className="bg-gradient-to-r from-[#F0B915] to-[#FFD452] text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
             Most Popular
           </span>
         </div>
@@ -60,7 +60,7 @@ export default function ServiceCard({ service, index, isPopular = false }: Servi
           href={`/services/${service.slug}`}
           className={`w-full text-center py-3 px-6 rounded-lg font-medium transition-all duration-200 block ${
             isPopular
-              ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white hover:shadow-lg transform hover:-translate-y-0.5'
+              ? 'bg-gradient-to-r from-[#F0B915] to-[#FFD452] text-white hover:shadow-lg transform hover:-translate-y-0.5'
               : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
           }`}
         >

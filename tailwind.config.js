@@ -82,10 +82,10 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'gradient-primary': 'linear-gradient(135deg, #fef08a 0%, #facc15 100%)',
+        'gradient-primary': 'linear-gradient(135deg, #F0B915 0%, #FFD452 100%)',
         'gradient-accent': 'linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%)',
-        'gradient-hero': 'linear-gradient(135deg, #fef08a 0%, #facc15 50%, #f0b915 100%)',
-        'gradient-subtle': 'linear-gradient(135deg, #fef08a 0%, #fde047 100%)',
+        'gradient-hero': 'linear-gradient(135deg, #F0B915 0%, #FFD452 100%)',
+        'gradient-subtle': 'linear-gradient(135deg, #F0B915 0%, #FFD452 100%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },

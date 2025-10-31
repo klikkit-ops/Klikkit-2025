@@ -10,6 +10,8 @@ const fallbackServices: Record<string, any> = {
     subtitle: 'Perfect for startups and solo traders',
     price_setup: 750,
     price_monthly: 150,
+    description: 'Get your business online quickly with a professional, AI-powered Progressive Web App (PWA). Perfect for startups, freelancers, and small businesses looking to establish a modern digital presence without breaking the bank. Our Digital Launchpad includes everything you need to start attracting customers online, from AI-generated content to smart SEO optimization.',
+    detailedDescription: 'The Digital Launchpad is designed for businesses that need a professional online presence fast. We use cutting-edge AI to generate engaging content and imagery tailored to your brand, saving you time and money. Your 5-page PWA website installs like a native app on phones, loads instantly, and works offline—giving your customers a premium experience that sets you apart from competitors.',
     features: [
       '5-page PWA website',
       'AI-assisted content & imagery',
@@ -24,6 +26,8 @@ const fallbackServices: Record<string, any> = {
     subtitle: 'Ideal for established small businesses',
     price_setup: 1250,
     price_monthly: 250,
+    description: 'Level up your digital presence with advanced features that drive real growth. Perfect for established businesses ready to scale, sell online, and automate customer interactions. Includes everything in Digital Launchpad plus e-commerce, advanced AI personalization, booking systems, and priority support.',
+    detailedDescription: 'The Business Growth Engine is built for businesses that have outgrown basic websites. With up to 10 pages plus a full e-commerce solution, you can showcase your products and services, accept bookings 24/7, and convert visitors into customers automatically. Our advanced AI personalization engine tailors content to each visitor based on their behavior, dramatically improving conversion rates. Priority support ensures you\'re never stuck when you need help most.',
     features: [
       'Up to 10 pages + e-commerce',
       'Advanced AI personalization',
@@ -39,6 +43,8 @@ const fallbackServices: Record<string, any> = {
     subtitle: 'Native iOS & Android apps for your business',
     price_setup: 3500,
     price_monthly: 300,
+    description: 'Take your business mobile with native iOS and Android apps that your customers can download from the App Store and Google Play. Perfect for businesses wanting to offer a premium mobile experience, increase customer engagement, and build brand loyalty through a dedicated app.',
+    detailedDescription: 'Native mobile apps give your business a significant competitive advantage. Customers spend 90% of their mobile time in apps, and apps see 3x higher conversion rates than mobile websites. We build your app using the latest native technologies (SwiftUI for iOS, Kotlin for Android) for the best possible performance and user experience. Our comprehensive package includes App Store and Play Store submission, push notifications to re-engage customers, analytics to track success, beta testing to gather feedback, and 3 months of post-launch support to ensure everything runs smoothly.',
     features: [
       'Native iOS app (SwiftUI)',
       'Native Android app (Kotlin)',
@@ -55,6 +61,8 @@ const fallbackServices: Record<string, any> = {
     subtitle: 'Fully bespoke architecture for complex needs',
     price_setup: 8000,
     price_monthly: 0,
+    description: 'For businesses with unique requirements that need a completely customized digital solution. Whether you need complex integrations, real-time dashboards, multi-platform apps, or cutting-edge features like AR/VR, our Custom Pro Solution delivers exactly what your business needs.',
+    detailedDescription: 'When your business needs go beyond standard solutions, we build something extraordinary. Our Custom Pro Solution is fully bespoke—designed and developed specifically for your unique requirements. This might include complex workflows, integrations with legacy systems, real-time data analytics dashboards, multi-platform apps (web + iOS + Android), or innovative features like AR/VR experiences. We price based on value delivered rather than time spent, ensuring you get a solution that drives real results for your business. Includes dedicated ongoing support and maintenance.',
     features: [
       'Fully bespoke architecture',
       'Custom logic, dashboards, integrations',
@@ -139,7 +147,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
             <p className={`text-xl mb-8 max-w-2xl mx-auto ${
               isMobileAppService ? 'text-white/90' : 'text-gray-600'
             }`}>
-              {service.subtitle}
+              {service.description || service.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link href="/contact" className="btn-gradient text-lg px-8 py-4 inline-flex items-center justify-center">
@@ -191,6 +199,26 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
           </div>
         </div>
       </section>
+
+      {/* Overview */}
+      {service.detailedDescription && (
+        <section className="section-padding bg-gray-50">
+          <div className="container-max">
+            <div className="max-w-4xl mx-auto">
+              <div className="glass-morphism rounded-2xl p-8 md:p-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                  About {service.title}
+                </h2>
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    {service.detailedDescription}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Features */}
       <section className="section-padding">

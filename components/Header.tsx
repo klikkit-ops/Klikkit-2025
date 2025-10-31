@@ -35,8 +35,8 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 transition-all duration-300 px-4 py-4">
-      <nav className="container-max max-w-6xl mx-auto">
+    <header className="sticky top-0 z-50 transition-all duration-300">
+      <nav className="container-max max-w-6xl mx-auto px-4 pt-4">
         <div 
           className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center"
           style={{

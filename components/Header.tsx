@@ -46,6 +46,7 @@ export default function Header() {
               width={150}
               height={48}
               className="transition-all duration-200 group-hover:opacity-80"
+              priority
             />
           </Link>
 

@@ -287,11 +287,11 @@ export default async function HomePage() {
           <div className="max-w-4xl mx-auto glass-morphism rounded-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gradient-primary text-white">
+                <thead>
                   <tr>
-                    <th className="px-6 py-4 text-left font-semibold">Feature</th>
-                    <th className="px-6 py-4 text-center font-semibold">Other Agencies</th>
-                    <th className="px-6 py-4 text-center font-semibold bg-primary-700">Klikkit</th>
+                    <th className="px-6 py-4 text-left font-semibold bg-gray-200 text-gray-900">Feature</th>
+                    <th className="px-6 py-4 text-center font-semibold bg-gray-400 text-white">Other Agencies</th>
+                    <th className="px-6 py-4 text-center font-semibold bg-gradient-primary text-white">Klikkit</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200">

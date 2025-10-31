@@ -36,9 +36,9 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-50 transition-all duration-300">
-      <nav className="container-max max-w-6xl mx-auto px-4 pt-4">
+      <nav className="container-max max-w-6xl mx-auto px-4">
         <div 
-          className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center"
+          className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center mt-4"
           style={{
             background: 'linear-gradient(to right, rgba(240, 185, 21, 0.35), rgba(240, 185, 21, 0.3))',
             backdropFilter: 'blur(20px) saturate(180%)',

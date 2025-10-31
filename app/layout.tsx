@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     locale: 'en_GB',
     images: [
       {
-        url: '/logo.png',
+        url: '/klikkit-logo.png',
         width: 370,
         height: 118,
         alt: 'Klikkit',

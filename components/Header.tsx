@@ -41,7 +41,7 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
-              src="/logo.png"
+              src="/klikkit-logo.png"
               alt="Klikkit Logo"
               width={150}
               height={48}

@@ -98,9 +98,16 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
     console.error('Error fetching service:', error)
   }
 
-  // Use fallback data if Supabase is not configured
+  // Use fallback data if Supabase is not configured, or merge fallback data if Supabase data lacks descriptions
   if (!service && fallbackServices[slug]) {
     service = fallbackServices[slug]
+  } else if (service && fallbackServices[slug]) {
+    // Merge fallback data to fill in any missing description fields
+    service = {
+      ...service,
+      description: service.description || fallbackServices[slug].description,
+      detailedDescription: service.detailedDescription || fallbackServices[slug].detailedDescription,
+    }
   }
 
   // If still no service found, show error

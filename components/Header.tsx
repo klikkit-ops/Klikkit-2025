@@ -8,6 +8,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [servicesMenuOpen, setServicesMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [dropdownCloseTimer, setDropdownCloseTimer] = useState<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -16,6 +17,21 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const handleServicesEnter = () => {
+    if (dropdownCloseTimer) {
+      clearTimeout(dropdownCloseTimer)
+      setDropdownCloseTimer(null)
+    }
+    setServicesMenuOpen(true)
+  }
+
+  const handleServicesLeave = () => {
+    const timer = setTimeout(() => {
+      setServicesMenuOpen(false)
+    }, 200) // 200ms delay before closing
+    setDropdownCloseTimer(timer)
+  }
 
   return (
     <header
@@ -38,8 +54,8 @@ export default function Header() {
             {/* Services Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setServicesMenuOpen(true)}
-              onMouseLeave={() => setServicesMenuOpen(false)}
+              onMouseEnter={handleServicesEnter}
+              onMouseLeave={handleServicesLeave}
             >
               <button className="flex items-center text-gray-600 hover:text-primary-600 transition-colors">
                 Services
@@ -55,8 +71,8 @@ export default function Header() {
               {servicesMenuOpen && (
                 <div 
                   className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 p-6 animate-fade-in"
-                  onMouseEnter={() => setServicesMenuOpen(true)}
-                  onMouseLeave={() => setServicesMenuOpen(false)}
+                  onMouseEnter={handleServicesEnter}
+                  onMouseLeave={handleServicesLeave}
                 >
                   <div className="grid grid-cols-1 gap-4">
                     <Link

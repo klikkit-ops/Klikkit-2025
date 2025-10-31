@@ -383,7 +383,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="text-center glass-morphism rounded-2xl p-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Zap className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Fast Setup</h3>
@@ -393,7 +393,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </div>
 
               <div className="text-center glass-morphism rounded-2xl p-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Trusted Partner</h3>
@@ -403,7 +403,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </div>
 
               <div className="text-center glass-morphism rounded-2xl p-8">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Growth Focused</h3>
@@ -428,7 +428,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
             <div className="space-y-8">
               <div className="glass-morphism rounded-2xl p-8 flex items-start">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
                   1
                 </div>
                 <div>
@@ -440,7 +440,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </div>
 
               <div className="glass-morphism rounded-2xl p-8 flex items-start">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
                   2
                 </div>
                 <div>
@@ -452,7 +452,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </div>
 
               <div className="glass-morphism rounded-2xl p-8 flex items-start">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
                   3
                 </div>
                 <div>
@@ -464,7 +464,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
               </div>
 
               <div className="glass-morphism rounded-2xl p-8 flex items-start">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
                   4
                 </div>
                 <div>

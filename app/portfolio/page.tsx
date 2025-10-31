@@ -73,7 +73,7 @@ export default function PortfolioPage() {
                   onClick={() => setSelectedFilter(type.value)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all duration-200 ${
                     selectedFilter === type.value
-                      ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-md'
+                      ? 'bg-gradient-to-r from-primary-300 to-primary-500 text-white shadow-md'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -117,7 +117,7 @@ export default function PortfolioPage() {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     {item.featured && (
                       <div className="absolute top-4 left-4 z-10">
-                        <span className="bg-gradient-to-r from-primary-600 to-accent-600 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
+                        <span className="bg-gradient-to-r from-primary-300 to-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium shadow-lg">
                           Featured
                         </span>
                       </div>

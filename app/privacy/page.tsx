@@ -9,7 +9,7 @@ export default function PrivacyPolicyPage() {
         <div className="container-max">
           <div className="max-w-3xl mx-auto text-center">
             <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center">
                 <ShieldCheck className="text-white" size={32} />
               </div>
             </div>

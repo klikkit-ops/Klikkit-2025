@@ -152,7 +152,7 @@ export default function ContactPage() {
                         <div
                           className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold transition-all duration-300 ${
                             currentStep === step.number
-                              ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white shadow-lg scale-110'
+                              ? 'bg-gradient-to-r from-primary-300 to-primary-500 text-white shadow-lg scale-110'
                               : currentStep > step.number
                               ? 'bg-green-500 text-white'
                               : 'bg-gray-200 text-gray-600'

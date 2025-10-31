@@ -205,7 +205,7 @@ export default async function HomePage() {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <Zap className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">AI-Powered</h3>
@@ -215,7 +215,7 @@ export default async function HomePage() {
               </div>
               
               <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <Shield className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Local Partner</h3>
@@ -225,7 +225,7 @@ export default async function HomePage() {
               </div>
               
               <div className="text-center glass-morphism rounded-2xl p-8 transition-all duration-300 hover:-translate-y-1">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <Users className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">Growth Focused</h3>

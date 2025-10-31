@@ -35,13 +35,9 @@ export default function Header() {
   }
 
   return (
-    <header
-      className={`bg-white shadow-sm sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'shadow-md' : ''
-      }`}
-    >
+    <header className="sticky top-4 z-50 transition-all duration-300">
       <nav className="container-max">
-        <div className="flex justify-between items-center h-16">
+        <div className="glass-morphism backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center max-w-6xl mx-auto">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
@@ -183,7 +179,7 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-white animate-slide-down">
+          <div className="md:hidden mt-4 glass-morphism backdrop-blur-xl rounded-2xl shadow-lg border border-white/30 animate-slide-down">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 href="/services"

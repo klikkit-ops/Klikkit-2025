@@ -78,6 +78,81 @@ const fallbackServices: Record<string, any> = {
       'AR/VR capabilities',
       'Real-time analytics dashboards'
     ]
+  },
+  'hosting': {
+    title: 'Web Hosting',
+    subtitle: 'Fast, secure hosting tailored to your needs',
+    price_setup: 0,
+    price_monthly: 0,
+    description: 'Reliable, high-performance web hosting with 99.9% uptime guarantee. Choose from shared hosting for small sites, VPS for growing businesses, or dedicated servers for maximum performance. All plans include SSL certificates, daily backups, and expert support.',
+    detailedDescription: 'Your website deserves hosting that's as professional as your business. Our Web Hosting service offers three tiers designed to match your needs as you grow. Starter hosting is perfect for small websites and low-traffic blogs, with generous resources to get you started. Business hosting provides the power and flexibility you need as your site gains traction, with enhanced performance and scalability options. Enterprise hosting delivers dedicated resources and advanced security for high-traffic sites that demand maximum uptime and performance. All plans include free SSL certificates, automated daily backups, 24/7 monitoring, malware protection, and expert support from our team. We host on premium infrastructure with SSD storage, CDN integration, and global edge locations for lightning-fast loading times worldwide. Your data is protected with end-to-end encryption and regular security audits.',
+    features: [
+      '99.9% uptime SLA',
+      'Free SSL certificates',
+      'Daily automated backups',
+      '24/7 expert support',
+      'SSD storage & CDN',
+      'Malware protection',
+      'DDoS protection',
+      'One-click WordPress install',
+      'Email hosting included',
+      'Performance optimization',
+      'Security monitoring',
+      'Easy scaling options'
+    ],
+    hostingPlans: [
+      {
+        name: 'Starter',
+        price: 15,
+        period: 'month',
+        setupFee: 0,
+        description: 'Perfect for small websites and blogs',
+        features: [
+          '50GB SSD storage',
+          '500GB bandwidth/month',
+          '5 email accounts',
+          '1 website',
+          'Free SSL',
+          'Basic support'
+        ]
+      },
+      {
+        name: 'Business',
+        price: 45,
+        period: 'month',
+        setupFee: 0,
+        description: 'Ideal for growing businesses',
+        features: [
+          '200GB SSD storage',
+          '2TB bandwidth/month',
+          '20 email accounts',
+          'Unlimited websites',
+          'Free SSL',
+          'Priority support',
+          'Daily backups',
+          'Performance boost'
+        ]
+      },
+      {
+        name: 'Enterprise',
+        price: 149,
+        period: 'month',
+        setupFee: 0,
+        description: 'Dedicated resources for high-traffic sites',
+        features: [
+          '1TB SSD storage',
+          'Unlimited bandwidth',
+          'Unlimited email accounts',
+          'Unlimited websites',
+          'Free SSL',
+          '24/7 dedicated support',
+          'Hourly backups',
+          'Advanced security',
+          'Performance optimization',
+          'DDoS protection'
+        ]
+      }
+    ]
   }
 }
 
@@ -180,29 +255,71 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       <section className="section-padding bg-white">
         <div className="container-max">
           <div className="max-w-4xl mx-auto">
-            <div className="glass-morphism rounded-2xl p-8 md:p-12 text-center">
-              <div className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
-                £{service.price_setup}
-              </div>
-              {service.price_monthly > 0 ? (
-                <>
-                  <div className="text-xl text-gray-600 mb-2">
-                    + £{service.price_monthly}/month
+            {service.hostingPlans ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {service.hostingPlans.map((plan: any, index: number) => (
+                  <div
+                    key={index}
+                    className={`glass-morphism rounded-2xl p-8 flex flex-col ${
+                      index === 1 ? 'border-2 border-primary-500' : ''
+                    }`}
+                  >
+                    <div className="text-center mb-6">
+                      {index === 1 && (
+                        <div className="inline-block bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">
+                          Most Popular
+                        </div>
+                      )}
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
+                      <div className="text-4xl font-bold text-gray-900 mb-2">
+                        £{plan.price}
+                      </div>
+                      <p className="text-gray-500 text-sm">per {plan.period}</p>
+                    </div>
+                    <ul className="flex-1 space-y-3 mb-6">
+                      {plan.features.map((feature: string, idx: number) => (
+                        <li key={idx} className="flex items-start">
+                          <CheckCircle className="text-primary-600 mr-2 mt-0.5 flex-shrink-0" size={18} />
+                          <span className="text-gray-700 text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href="/contact"
+                      className="w-full btn-gradient text-center inline-flex items-center justify-center"
+                    >
+                      Get Started
+                      <ArrowRight className="ml-2" size={20} />
+                    </Link>
                   </div>
+                ))}
+              </div>
+            ) : (
+              <div className="glass-morphism rounded-2xl p-8 md:p-12 text-center">
+                <div className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+                  £{service.price_setup}
+                </div>
+                {service.price_monthly > 0 ? (
+                  <>
+                    <div className="text-xl text-gray-600 mb-2">
+                      + £{service.price_monthly}/month
+                    </div>
+                    <p className="text-gray-500 text-sm mb-8">
+                      One-time setup fee, then monthly support
+                    </p>
+                  </>
+                ) : (
                   <p className="text-gray-500 text-sm mb-8">
-                    One-time setup fee, then monthly support
+                    One-time setup, custom pricing
                   </p>
-                </>
-              ) : (
-                <p className="text-gray-500 text-sm mb-8">
-                  One-time setup, custom pricing
-                </p>
-              )}
-              <Link href="/contact" className="btn-gradient inline-flex items-center text-lg px-8 py-4">
-                Request a quote
-                <ArrowRight className="ml-2" size={20} />
-              </Link>
-            </div>
+                )}
+                <Link href="/contact" className="btn-gradient inline-flex items-center text-lg px-8 py-4">
+                  Request a quote
+                  <ArrowRight className="ml-2" size={20} />
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </section>

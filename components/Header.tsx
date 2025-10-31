@@ -126,6 +126,16 @@ export default function Header() {
                       </div>
                       <div className="text-sm text-gray-600">Enterprise solutions</div>
                     </Link>
+                    <Link
+                      href="/services/hosting"
+                      className="p-4 rounded-lg hover:bg-gray-50 transition-colors group border-t border-gray-200 pt-4"
+                      onClick={() => setServicesMenuOpen(false)}
+                    >
+                      <div className="font-semibold text-gray-900 mb-1 group-hover:text-primary-600">
+                        Web Hosting
+                      </div>
+                      <div className="text-sm text-gray-600">Reliable hosting plans</div>
+                    </Link>
                   </div>
                 </div>
               )}

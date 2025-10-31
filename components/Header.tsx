@@ -40,7 +40,7 @@ export default function Header() {
         <div 
           className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center max-w-6xl mx-auto"
           style={{
-            background: 'linear-gradient(to right, rgba(240, 185, 21, 0.3), rgba(240, 185, 21, 0.25))',
+            background: 'linear-gradient(to right, rgba(240, 185, 21, 0.35), rgba(240, 185, 21, 0.3))',
             backdropFilter: 'blur(20px) saturate(180%)',
             WebkitBackdropFilter: 'blur(20px) saturate(180%)',
           }}

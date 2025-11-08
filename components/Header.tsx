@@ -35,10 +35,10 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none">
+    <header className="fixed top-4 left-0 right-0 z-50 transition-all duration-300 pointer-events-none sm:top-6">
       <nav className="container-max max-w-6xl mx-auto px-4 pointer-events-auto">
         <div 
-          className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center mt-4"
+          className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center"
           style={{
             background: 'linear-gradient(to right, rgba(240, 185, 21, 0.35), rgba(240, 185, 21, 0.3))',
             backdropFilter: 'blur(20px) saturate(180%)',

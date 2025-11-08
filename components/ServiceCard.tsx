@@ -21,8 +21,8 @@ export default function ServiceCard({ service, index, isPopular = false }: Servi
       }}
     >
       {isPopular && (
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 animate-pulse-glow">
-          <span className="bg-gradient-to-r from-primary-600 to-accent-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
+        <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+          <span className="bg-primary-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg">
             Most Popular
           </span>
         </div>
@@ -56,11 +56,11 @@ export default function ServiceCard({ service, index, isPopular = false }: Servi
       </ul>
 
       <div className="space-y-3">
-            <Link
+        <Link
           href={`/services/${service.slug}`}
           className={`w-full text-center py-3 px-6 rounded-lg font-medium transition-all duration-200 block ${
             isPopular
-              ? 'bg-gradient-to-r from-primary-600 to-accent-600 text-white hover:shadow-lg transform hover:-translate-y-0.5'
+              ? 'bg-primary-600 hover:bg-primary-800 text-white hover:shadow-lg transform hover:-translate-y-0.5'
               : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
           }`}
         >
@@ -70,7 +70,7 @@ export default function ServiceCard({ service, index, isPopular = false }: Servi
           href="/contact"
           className={`w-full text-center py-3 px-6 rounded-lg font-medium border transition-all duration-200 block ${
             isPopular
-              ? 'border-primary-600 text-primary-600 hover:bg-primary-50'
+              ? 'border-primary-500 text-primary-600 hover:bg-primary-50'
               : 'border-gray-300 text-gray-700 hover:bg-gray-50'
           }`}
         >

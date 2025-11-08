@@ -58,13 +58,13 @@ export default function ProcessSection() {
             >
               {/* Connector Line */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-primary-500 to-accent-500 z-0">
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-4 border-l-primary-500 border-t-2 border-t-transparent border-b-2 border-b-transparent"></div>
+                <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-0.5 bg-primary-600 z-0">
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0 h-0 border-l-4 border-l-primary-600 border-t-2 border-t-transparent border-b-2 border-b-transparent"></div>
                 </div>
               )}
 
               {/* Step Number */}
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-primary-600 to-accent-600 rounded-full mb-6 mx-auto text-white text-2xl font-bold shadow-lg">
+              <div className="flex items-center justify-center w-16 h-16 bg-primary-600 rounded-full mb-6 mx-auto text-white text-2xl font-bold shadow-lg">
                 {step.number}
               </div>
 

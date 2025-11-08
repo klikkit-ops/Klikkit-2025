@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { Menu, X, ChevronDown, Sparkles } from 'lucide-react'
 
@@ -8,6 +9,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [servicesMenuOpen, setServicesMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [dropdownCloseTimer, setDropdownCloseTimer] = useState<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,20 +19,42 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const handleServicesEnter = () => {
+    if (dropdownCloseTimer) {
+      clearTimeout(dropdownCloseTimer)
+      setDropdownCloseTimer(null)
+    }
+    setServicesMenuOpen(true)
+  }
+
+  const handleServicesLeave = () => {
+    const timer = setTimeout(() => {
+      setServicesMenuOpen(false)
+    }, 200) // 200ms delay before closing
+    setDropdownCloseTimer(timer)
+  }
+
   return (
-    <header
-      className={`bg-white shadow-sm sticky top-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'shadow-md' : ''
-      }`}
-    >
-      <nav className="container-max">
-        <div className="flex justify-between items-center h-16">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none">
+      <nav className="container-max max-w-6xl mx-auto px-4 pointer-events-auto">
+        <div 
+          className="backdrop-blur-xl rounded-full px-6 py-3 shadow-lg border border-white/30 flex justify-between items-center mt-4"
+          style={{
+            background: 'linear-gradient(to right, rgba(240, 185, 21, 0.35), rgba(240, 185, 21, 0.3))',
+            backdropFilter: 'blur(20px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+          }}
+        >
           {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2 group">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary-600 to-primary-500 rounded-lg flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
-              <span className="text-white font-bold text-lg">K</span>
-            </div>
-            <span className="text-xl font-bold text-gray-900">Klikkit</span>
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="/klikkit-logo.png"
+              alt="Klikkit Logo"
+              width={150}
+              height={48}
+              className="transition-all duration-200 group-hover:opacity-80"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -38,8 +62,8 @@ export default function Header() {
             {/* Services Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setServicesMenuOpen(true)}
-              onMouseLeave={() => setServicesMenuOpen(false)}
+              onMouseEnter={handleServicesEnter}
+              onMouseLeave={handleServicesLeave}
             >
               <button className="flex items-center text-gray-600 hover:text-primary-600 transition-colors">
                 Services
@@ -53,7 +77,11 @@ export default function Header() {
 
               {/* Mega Menu */}
               {servicesMenuOpen && (
-                <div className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 p-6 animate-fade-in">
+                <div 
+                  className="absolute top-full left-0 mt-2 w-96 bg-white rounded-lg shadow-xl border border-gray-200 p-6 animate-fade-in"
+                  onMouseEnter={handleServicesEnter}
+                  onMouseLeave={handleServicesLeave}
+                >
                   <div className="grid grid-cols-1 gap-4">
                     <Link
                       href="/services"
@@ -106,6 +134,16 @@ export default function Header() {
                       </div>
                       <div className="text-sm text-gray-600">Enterprise solutions</div>
                     </Link>
+                    <Link
+                      href="/services/hosting"
+                      className="p-4 rounded-lg hover:bg-gray-50 transition-colors group border-t border-gray-200 pt-4"
+                      onClick={() => setServicesMenuOpen(false)}
+                    >
+                      <div className="font-semibold text-gray-900 mb-1 group-hover:text-primary-600">
+                        Web Hosting
+                      </div>
+                      <div className="text-sm text-gray-600">Reliable hosting plans</div>
+                    </Link>
                   </div>
                 </div>
               )}
@@ -149,7 +187,7 @@ export default function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-white animate-slide-down">
+          <div className="md:hidden mt-4 glass-morphism backdrop-blur-xl rounded-2xl shadow-lg border border-white/30 animate-slide-down">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 href="/services"

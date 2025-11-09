@@ -1,0 +1,518 @@
+import Link from 'next/link'
+import Image from 'next/image'
+import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, TrendingUp } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
+
+// Fallback service data for when Supabase is not configured
+const fallbackServices: Record<string, any> = {
+  'digital-launchpad': {
+    title: 'Digital Launchpad',
+    subtitle: 'Perfect for startups and solo traders',
+    price_setup: 750,
+    price_monthly: 150,
+    description: 'Get your business online quickly with a professional, AI-powered Progressive Web App (PWA). Perfect for startups, freelancers, and small businesses looking to establish a modern digital presence without breaking the bank. Our Digital Launchpad includes everything you need to start attracting customers online, from AI-generated content to smart SEO optimization.',
+    detailedDescription: 'The Digital Launchpad is designed for businesses that need a professional online presence fast. We use cutting-edge AI to generate engaging content and imagery tailored to your brand, saving you time and money. Your 5-page PWA website installs like a native app on phones, loads instantly, and works offline—giving your customers a premium experience that sets you apart from competitors. Our AI chatbot handles customer inquiries 24/7, while smart SEO optimization helps you appear at the top of local search results. With our all-inclusive package, you get hosting, security updates, and ongoing maintenance—no technical knowledge required.',
+    features: [
+      '5-page PWA website',
+      'AI-assisted content & imagery',
+      'Basic AI chatbot',
+      'SEO setup + Google Business integration',
+      'Hosting & security',
+      'Progressive Web App (PWA) features'
+    ]
+  },
+  'business-growth-engine': {
+    title: 'Business Growth Engine',
+    subtitle: 'Ideal for established small businesses',
+    price_setup: 1250,
+    price_monthly: 250,
+    description: 'Level up your digital presence with advanced features that drive real growth. Perfect for established businesses ready to scale, sell online, and automate customer interactions. Includes everything in Digital Launchpad plus e-commerce, advanced AI personalization, booking systems, and priority support.',
+    detailedDescription: 'The Business Growth Engine is built for businesses that have outgrown basic websites. With up to 10 pages plus a full e-commerce solution, you can showcase your products and services, accept bookings 24/7, and convert visitors into customers automatically. Our advanced AI personalization engine tailors content to each visitor based on their behavior, dramatically improving conversion rates—typically boosting sales by 35% or more. The voice interface allows customers to interact with your website naturally, while offline capabilities mean your PWA works even without internet. With priority support and dedicated account management, you get expert help whenever you need it, ensuring your digital presence always delivers results.',
+    features: [
+      'Up to 10 pages + e-commerce',
+      'Advanced AI personalization',
+      'Booking systems / advanced forms',
+      'Priority support',
+      'Everything in Digital Launchpad',
+      'Advanced PWA with offline capabilities',
+      'Voice interface integration'
+    ]
+  },
+  'mobile-app-development': {
+    title: 'Mobile App Development',
+    subtitle: 'Native iOS & Android apps for your business',
+    price_setup: 3500,
+    price_monthly: 300,
+    description: 'Take your business mobile with native iOS and Android apps that your customers can download from the App Store and Google Play. Perfect for businesses wanting to offer a premium mobile experience, increase customer engagement, and build brand loyalty through a dedicated app.',
+    detailedDescription: 'Native mobile apps give your business a significant competitive advantage. Customers spend 90% of their mobile time in apps, and apps see 3x higher conversion rates than mobile websites. We build your app using the latest native technologies (SwiftUI for iOS, Kotlin for Android) for the best possible performance and user experience. Our comprehensive package includes App Store and Play Store submission, push notifications to re-engage customers, analytics to track success, beta testing to gather feedback, and 3 months of post-launch support to ensure everything runs smoothly.',
+    features: [
+      'Native iOS app (SwiftUI)',
+      'Native Android app (Kotlin)',
+      'Cross-platform option (React Native/Flutter)',
+      'App Store & Play Store submission',
+      'Push notifications setup',
+      'Analytics integration',
+      'Beta testing program',
+      '3 months post-launch support'
+    ]
+  },
+  'custom-pro-solution': {
+    title: 'Custom Pro Solution',
+    subtitle: 'Fully bespoke architecture for complex needs',
+    price_setup: 8000,
+    price_monthly: 0,
+    description: 'For businesses with unique requirements that need a completely customized digital solution. Whether you need complex integrations, real-time dashboards, multi-platform apps, or cutting-edge features like AR/VR, our Custom Pro Solution delivers exactly what your business needs.',
+    detailedDescription: 'When your business needs go beyond standard solutions, we build something extraordinary. Our Custom Pro Solution is fully bespoke—designed and developed specifically for your unique requirements. This might include complex workflows, integrations with legacy systems, real-time data analytics dashboards, multi-platform apps (web + iOS + Android), or innovative features like AR/VR experiences. We use enterprise-grade technologies (React, Node.js, React Native, Flutter) to ensure scalability and reliability as your business grows. Our value-based pricing model means you pay for results, not hours—if we don\'t deliver measurable improvements to your business, you don\'t pay. With dedicated ongoing support, maintenance, and feature additions, your solution evolves with your business needs.',
+    features: [
+      'Fully bespoke architecture',
+      'Custom logic, dashboards, integrations',
+      'Dedicated support + maintenance',
+      'React, Node, React-Native/Flutter',
+      'Value-based pricing',
+      'Native iOS app development',
+      'Native Android app development',
+      'Cross-platform mobile apps',
+      'App Store optimization',
+      'Push notifications',
+      'Apple Pay & Google Pay integration',
+      'AR/VR capabilities',
+      'Real-time analytics dashboards'
+    ]
+  },
+  'hosting': {
+    title: 'Web Hosting',
+    subtitle: 'Fast, secure hosting tailored to your needs',
+    price_setup: 0,
+    price_monthly: 0,
+    description: 'Reliable, high-performance web hosting with 99.9% uptime guarantee. Choose from shared hosting for small sites, VPS for growing businesses, or dedicated servers for maximum performance. All plans include SSL certificates, daily backups, and expert support.',
+    detailedDescription: 'Your website deserves hosting that\'s as professional as your business. Our Web Hosting service offers three tiers designed to match your needs as you grow. Starter hosting is perfect for small websites and low-traffic blogs, with generous resources to get you started. Business hosting provides the power and flexibility you need as your site gains traction, with enhanced performance and scalability options. Enterprise hosting delivers dedicated resources and advanced security for high-traffic sites that demand maximum uptime and performance. All plans include free SSL certificates, automated daily backups, 24/7 monitoring, malware protection, and expert support from our team. We host on premium infrastructure with SSD storage, CDN integration, and global edge locations for lightning-fast loading times worldwide. Your data is protected with end-to-end encryption and regular security audits.',
+    features: [
+      '99.9% uptime SLA',
+      'Free SSL certificates',
+      'Daily automated backups',
+      '24/7 expert support',
+      'SSD storage & CDN',
+      'Malware protection',
+      'DDoS protection',
+      'One-click WordPress install',
+      'Email hosting included',
+      'Performance optimization',
+      'Security monitoring',
+      'Easy scaling options'
+    ],
+    hostingPlans: [
+      {
+        name: 'Starter',
+        price: 15,
+        period: 'month',
+        setupFee: 0,
+        description: 'Perfect for small websites and blogs',
+        features: [
+          '50GB SSD storage',
+          '500GB bandwidth/month',
+          '5 email accounts',
+          '1 website',
+          'Free SSL',
+          'Basic support'
+        ]
+      },
+      {
+        name: 'Business',
+        price: 45,
+        period: 'month',
+        setupFee: 0,
+        description: 'Ideal for growing businesses',
+        features: [
+          '200GB SSD storage',
+          '2TB bandwidth/month',
+          '20 email accounts',
+          'Unlimited websites',
+          'Free SSL',
+          'Priority support',
+          'Daily backups',
+          'Performance boost'
+        ]
+      },
+      {
+        name: 'Enterprise',
+        price: 149,
+        period: 'month',
+        setupFee: 0,
+        description: 'Dedicated resources for high-traffic sites',
+        features: [
+          '1TB SSD storage',
+          'Unlimited bandwidth',
+          'Unlimited email accounts',
+          'Unlimited websites',
+          'Free SSL',
+          '24/7 dedicated support',
+          'Hourly backups',
+          'Advanced security',
+          'Performance optimization',
+          'DDoS protection'
+        ]
+      }
+    ]
+  }
+}
+
+export default async function ServiceDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+
+  // Fetch the specific service
+  let service = null
+  try {
+    const { data } = await supabase
+      .from('services')
+      .select('*')
+      .eq('slug', slug)
+      .eq('active', true)
+      .single()
+    service = data
+  } catch (error) {
+    console.error('Error fetching service:', error)
+  }
+
+  // Use fallback data if Supabase is not configured, or merge fallback data if Supabase data lacks descriptions
+  if (!service && fallbackServices[slug]) {
+    service = fallbackServices[slug]
+  } else if (service && fallbackServices[slug]) {
+    // Merge fallback data to fill in any missing description fields
+    service = {
+      ...service,
+      description: service.description || fallbackServices[slug].description,
+      detailedDescription: service.detailedDescription || fallbackServices[slug].detailedDescription,
+    }
+  }
+
+  // If still no service found, show error
+  if (!service) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Service not found</h1>
+          <Link href="/services" className="text-primary-600 hover:text-primary-700">
+            Back to all services
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  const isMobileAppService = slug === 'mobile-app-development'
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className={`relative overflow-hidden section-padding-lg ${
+        isMobileAppService ? 'bg-gradient-hero text-white' : 'bg-white'
+      }`}>
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <Image
+            src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920&q=80"
+            alt="Digital services"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="container-max relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            {isMobileAppService && (
+              <div className="inline-flex items-center gap-2 glass-morphism px-4 py-2 rounded-full mb-6">
+                <Sparkles className="text-primary-600" size={16} />
+                <span className="text-sm font-medium text-gray-900">Featured Service</span>
+              </div>
+            )}
+            <h1 className={`text-4xl md:text-6xl font-bold mb-6 ${isMobileAppService ? 'text-white' : 'text-gray-900'}`}>
+              {service.title}
+            </h1>
+            <p className={`text-xl mb-8 max-w-2xl mx-auto ${
+              isMobileAppService ? 'text-white/90' : 'text-gray-600'
+            }`}>
+              {service.description || service.subtitle}
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="btn-gradient text-lg px-8 py-4 inline-flex items-center justify-center">
+                Get Started
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+              <Link 
+                href="/contact" 
+                className={`text-lg px-8 py-4 rounded-lg font-medium transition-all duration-200 inline-flex items-center justify-center border-2 ${
+                  isMobileAppService 
+                    ? 'border-white text-white hover:bg-white hover:text-primary-600' 
+                    : 'border-primary-600 text-primary-600 hover:bg-primary-50'
+                }`}
+              >
+                Book a call
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing */}
+      <section className="section-padding bg-white">
+        <div className="container-max">
+          <div className="max-w-4xl mx-auto">
+            {service.hostingPlans ? (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {service.hostingPlans.map((plan: any, index: number) => (
+                  <div
+                    key={index}
+                    className={`glass-morphism rounded-2xl p-8 flex flex-col ${
+                      index === 1 ? 'border-2 border-primary-500' : ''
+                    }`}
+                  >
+                    <div className="text-center mb-6">
+                      {index === 1 && (
+                        <div className="inline-block bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">
+                          Most Popular
+                        </div>
+                      )}
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
+                      <div className="text-4xl font-bold text-gray-900 mb-2">
+                        £{plan.price}
+                      </div>
+                      <p className="text-gray-500 text-sm">per {plan.period}</p>
+                    </div>
+                    <ul className="flex-1 space-y-3 mb-6">
+                      {plan.features.map((feature: string, idx: number) => (
+                        <li key={idx} className="flex items-start">
+                          <CheckCircle className="text-primary-600 mr-2 mt-0.5 flex-shrink-0" size={18} />
+                          <span className="text-gray-700 text-sm">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href="/contact"
+                      className="w-full btn-gradient text-center inline-flex items-center justify-center"
+                    >
+                      Get Started
+                      <ArrowRight className="ml-2" size={20} />
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="glass-morphism rounded-2xl p-8 md:p-12 text-center">
+                <div className="text-5xl md:text-6xl font-bold text-gray-900 mb-4">
+                  £{service.price_setup}
+                </div>
+                {service.price_monthly > 0 ? (
+                  <>
+                    <div className="text-xl text-gray-600 mb-2">
+                      + £{service.price_monthly}/month
+                    </div>
+                    <p className="text-gray-500 text-sm mb-8">
+                      One-time setup fee, then monthly support
+                    </p>
+                  </>
+                ) : (
+                  <p className="text-gray-500 text-sm mb-8">
+                    One-time setup, custom pricing
+                  </p>
+                )}
+                <Link href="/contact" className="btn-gradient inline-flex items-center text-lg px-8 py-4">
+                  Request a quote
+                  <ArrowRight className="ml-2" size={20} />
+                </Link>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Overview */}
+      {service.detailedDescription && (
+        <section className="section-padding bg-gray-50">
+          <div className="container-max">
+            <div className="max-w-4xl mx-auto">
+              <div className="glass-morphism rounded-2xl p-8 md:p-10">
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                  About {service.title}
+                </h2>
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-700 text-lg leading-relaxed">
+                    {service.detailedDescription}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Features */}
+      <section className="section-padding">
+        <div className="container-max">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                What's included
+              </h2>
+              <p className="text-xl text-gray-600">
+                Everything you need to get started and grow
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {service.features.map((feature: string, index: number) => (
+                <div key={index} className="flex items-start glass-morphism rounded-xl p-6">
+                  <CheckCircle className="text-primary-600 mr-4 mt-0.5 flex-shrink-0" size={24} />
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">{feature}</h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose This Service */}
+      <section className="section-padding bg-white">
+        <div className="container-max">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Why {service.title}?
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center glass-morphism rounded-2xl p-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Zap className="text-white" size={32} />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Fast Setup</h3>
+                <p className="text-gray-600">
+                  Get up and running quickly with our streamlined process
+                </p>
+              </div>
+
+              <div className="text-center glass-morphism rounded-2xl p-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Shield className="text-white" size={32} />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Trusted Partner</h3>
+                <p className="text-gray-600">
+                  Ongoing support and maintenance included
+                </p>
+              </div>
+
+              <div className="text-center glass-morphism rounded-2xl p-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <TrendingUp className="text-white" size={32} />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Growth Focused</h3>
+                <p className="text-gray-600">
+                  Built to scale with your business
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Process */}
+      <section className="section-padding">
+        <div className="container-max">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                How it works
+              </h2>
+            </div>
+
+            <div className="space-y-8">
+              <div className="glass-morphism rounded-2xl p-8 flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                  1
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Discovery & Planning</h3>
+                  <p className="text-gray-600">
+                    We'll discuss your goals, target audience, and requirements to create a tailored plan.
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-morphism rounded-2xl p-8 flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                  2
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Design & Development</h3>
+                  <p className="text-gray-600">
+                    We build your solution using the latest technologies and best practices.
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-morphism rounded-2xl p-8 flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                  3
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Testing & Launch</h3>
+                  <p className="text-gray-600">
+                    Thorough testing ensures everything works perfectly before going live.
+                  </p>
+                </div>
+              </div>
+
+              <div className="glass-morphism rounded-2xl p-8 flex items-start">
+                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-primary-300 to-primary-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-6">
+                  4
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Ongoing Support</h3>
+                  <p className="text-gray-600">
+                    Continuous improvements and updates to keep you ahead of the competition.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section-padding bg-gradient-hero text-white relative overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden opacity-10">
+          <Image
+            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1920&q=80"
+            alt="Call to action"
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="container-max relative z-10">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Ready to get started?
+            </h2>
+            <p className="text-xl text-white/90 mb-8">
+              Book a free consultation to discuss how {service.title} can help your business grow.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/contact" className="bg-white text-primary-600 hover:bg-gray-100 font-medium py-4 px-8 rounded-lg transition-colors text-lg inline-flex items-center justify-center">
+                Get started today
+                <ArrowRight className="ml-2" size={20} />
+              </Link>
+              <Link 
+                href="/portfolio" 
+                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 font-medium py-4 px-8 rounded-lg transition-colors text-lg inline-flex items-center justify-center"
+              >
+                View our work
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  )
+}
+

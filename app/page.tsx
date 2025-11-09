@@ -28,7 +28,7 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Conversion Focused */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden section-padding-lg">
         {/* Background Image with Glass Overlay */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
@@ -47,7 +47,7 @@ export default async function HomePage() {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#FFD452]/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
         </div>
 
-        <div className="container-max relative z-10 px-4 sm:px-6 lg:px-8 pt-32 pb-24 md:pt-40">
+        <div className="container-max relative z-10">
           <div className="max-w-5xl mx-auto text-center text-white">
             {/* Trust Badge with Glass Effect */}
             <div className="inline-flex items-center gap-2 glass-morphism px-4 py-2 rounded-full mb-6 animate-fade-in">

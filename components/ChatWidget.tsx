@@ -95,7 +95,7 @@ export default function ChatWidget() {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 bg-primary-600 hover:bg-primary-700 text-white p-4 rounded-full shadow-lg transition-colors z-50"
+        className="fixed bottom-6 right-6 bg-primary-600 hover:bg-primary-800 text-white p-4 rounded-full shadow-lg transition-colors z-50"
         aria-label="Open chat"
       >
         {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
